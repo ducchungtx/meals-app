@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './favorites_screen.dart';
+import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -14,13 +16,17 @@ class _TabsScreenState extends State<TabsScreen> {
         length: 2,
         child: Scaffold(
             appBar: AppBar(
-                title: const Text('Tabs'),
-                bottom: TabBar(tabs: [
-                  Tab(text: 'Tab 1'),
+                title: const Text('Meals'),
+                bottom: const TabBar(tabs: [
+                  Tab(
+                    text: 'Categories',
+                    icon: Icon(Icons.category),
+                  ),
+                  Tab(text: 'Favorites', icon: Icon(Icons.star))
                 ])),
-            body: TabBarView(children: [
-              Center(child: Text('Tab 1')),
-              Center(child: Text('Tab 2')),
+            body: const TabBarView(children: [
+              CategoriesScreen(),
+              FavoritesScreen(),
             ])));
   }
 }
