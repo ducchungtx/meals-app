@@ -28,22 +28,23 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
       _filters = filterData;
 
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if (_filters['gluten']! && !meal.isGlutenFree) {
+        if (_filters['gluten'] == true && !meal.isGlutenFree) {
           return false;
         }
-        if (_filters['lactose']! && !meal.isLactoseFree) {
+        if (_filters['lactose'] == true && !meal.isLactoseFree) {
           return false;
         }
-        if (_filters['vegan']! && !meal.isVegan) {
+        if (_filters['vegan'] == true && !meal.isVegan) {
           return false;
         }
-        if (_filters['vegetarian']! && !meal.isVegetarian) {
+        if (_filters['vegetarian'] == true && !meal.isVegetarian) {
           return false;
         }
         return true;
@@ -70,11 +71,11 @@ class _MyAppState extends State<MyApp> {
       // home: CategoriesScreen(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => const TabsScreen(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        '/': (ctx) => TabsScreen(_favoriteMeals),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(_availableMeals),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-        FiltersScreen.routeName: (ctx) => FiltersScreen(
-            currentFilters: _filters, onFiltersChanged: _setFilters),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(

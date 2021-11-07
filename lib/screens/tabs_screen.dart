@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/main_drawer.dart';
+import '../models/meal.dart';
 import './favorites_screen.dart';
 import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<Meal> favoriteMeals;
+  TabsScreen(this.favoriteMeals);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
