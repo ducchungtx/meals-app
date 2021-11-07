@@ -14,12 +14,23 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, Object>> _pages = [
-    {'page': CategoriesScreen(), 'title': 'Categories'},
-    {'page': FavoritesScreen(), 'title': 'Your Favorites'},
-  ];
-
+  List<Map<String, Object>> _pages = [];
   int _selectedPageIndex = 0;
+
+  @override
+  initState() {
+    _pages = [
+      {
+        'page': CategoriesScreen(),
+        'title': 'Categories',
+      },
+      {
+        'page': FavoritesScreen(widget.favoriteMeals),
+        'title': 'Favorites',
+      },
+    ];
+    super.initState();
+  }
 
   void _selectPage(int index) {
     setState(() {
